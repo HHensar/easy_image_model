@@ -40,7 +40,7 @@ pip install easy-image-model
 Or for development:
 
 ```bash
-git clone https://github.com/hhensar/easy-image-model.git
+git clone https://github.com/HHensar/easy_image_model.git
 cd easy-image-model
 pip install -e ".[dev]"
 ```
@@ -79,4 +79,5 @@ print(result)
  'Penguins': 0.05, 
  'Owls': 0.23, 
  'Others': 0.1}
+
 ```
