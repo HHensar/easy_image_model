@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "easy-image-model"
+version = "0.1.0"
+description = "Easy PyTorch image classification library"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [
+    {name = "Harrison Hensarling", email = "harrisonhensarling@gmail.com"},
+]
+maintainers = [
+    {name = "Harrison Hensarling", email = "harrisonhensarling@gmail.com"},
+]
+keywords = ["machine learning", "pytorch", "image classification"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch>=2.0",
+    "torchvision>=0.15",
+    "pillow>=9.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/HHensar/easy_image_model"
+Documentation = "https://github.com/HHensar/easy_image_model#readme"
+Repository = "https://github.com/HHensar/easy_image_model"
+Issues = "https://github.com/HHensar/easy_image_model/issues"
+Changelog = "https://github.com/HHensar/easy_image_model/blob/main/CHANGELOG.md"
+
+[tool.setuptools]
+packages = ["easy_image_model"]
+
+[tool.setuptools.package-dir]
+"" = "."
+
+# Optional: Add development dependencies
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=22.0",
+    "isort>=5.0",
+    "flake8>=4.0",
+    "mypy>=1.0",
+]
+
+# Optional: Configure tools
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
