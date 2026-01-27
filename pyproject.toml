@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "easy-image-model"
-version = "0.1.0"
+version = "0.1.1"
 description = "Easy PyTorch image classification library"
 readme = "README.md"
 license = "MIT"
@@ -68,4 +68,5 @@ profile = "black"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = false
+
 disallow_incomplete_defs = false
