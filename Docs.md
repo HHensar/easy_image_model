@@ -178,5 +178,3 @@ print(result)
 ````
 
 The returned dictionary maps each category to its predicted probability for the input image.
-
-```
