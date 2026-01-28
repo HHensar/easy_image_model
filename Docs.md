@@ -1,71 +1,109 @@
 # Easy Image Model Documentation
 
-This document describes the main functions in the `easy_image_model` package for creating, training, and evaluating image classification models.
+`easy_image_model` is a lightweight Python library for creating, training, and evaluating image classification models with minimal setup.
+
+---
 
 ## Functions
 
-### create_model(layers, categories, img_size=224, channels=3)
+### `create_model(layers, categories, img_size=224, channels=3)`
 
 Creates a new image classification model.
 
-**Parameters:**
-- `layers` (list of int): List of positive integers specifying the hidden layer sizes.
-- `categories` (list of str): List of unique category names for classification.
-- `img_size` (int, optional): Image size (default 224). Must be positive.
-- `channels` (int, optional): Number of image channels (default 3).
+#### Parameters
+- **`layers`** (`list[int]`)  
+  List of positive integers specifying the hidden layer sizes.
 
-**Returns:**
-- dict: Model configuration as a dictionary, including categories, img_size, and channels.
+- **`categories`** (`list[str]`)  
+  List of unique category names for classification.
 
-**Raises:**
-- ValueError: If layers or categories are invalid.
+- **`img_size`** (`int`, optional)  
+  Image size (default: `224`). Images are resized to `img_size × img_size`.
 
-### train_model(model_json, img_path, labels, lr=1e-4)
+- **`channels`** (`int`, optional)  
+  Number of image channels (default: `3`).
 
-Trains the model on a single image with given labels.
+#### Returns
+- **`dict`**  
+  Model configuration object used for training and evaluation.
 
-**Parameters:**
-- `model_json` (dict): Model configuration from `create_model`.
-- `img_path` (str): Path to the image file.
-- `labels` (list of str): List of category labels for the image.
-- `lr` (float, optional): Learning rate (default 1e-4).
+#### Raises
+- `ValueError` if layers or categories are invalid.
 
-**Returns:**
-- dict: Updated model configuration after training.
+---
 
-**Raises:**
-- ValueError: If model_json is invalid.
-- FileNotFoundError: If img_path does not exist.
+### `train_model(model, img_path, labels, lr=1e-4)`
 
-### train_model_batch_folders(model_json, folder_paths, batch_size=4, epochs=5, lr=1e-4)
+Trains the model on a single image with the provided labels.
 
-Trains the model on batches of images from folders, where each folder corresponds to a category.
+#### Parameters
+- **`model`** (`dict`)  
+  Model configuration returned by `create_model`.
 
-**Parameters:**
-- `model_json` (dict): Model configuration from `create_model`.
-- `folder_paths` (dict): Dictionary mapping category names to folder paths containing images.
-- `batch_size` (int, optional): Number of images per batch (default 4).
-- `epochs` (int, optional): Number of training epochs (default 5).
-- `lr` (float, optional): Learning rate (default 1e-4).
+- **`img_path`** (`str`)  
+  Path to the image file.
 
-**Returns:**
-- dict: Updated model configuration after training.
+- **`labels`** (`list[str]`)  
+  List of category labels associated with the image.
 
-**Raises:**
-- ValueError: If inputs are invalid.
-- FileNotFoundError: If folders do not exist.
+- **`lr`** (`float`, optional)  
+  Learning rate (default: `1e-4`).
 
-### evaluate_model(model_json, img_path)
+#### Returns
+- **`dict`**  
+  Updated model configuration after training.
+
+#### Raises
+- `ValueError` if the model is invalid.
+- `FileNotFoundError` if `img_path` does not exist.
+
+---
+
+### `train_model_batch_folders(model, folder_paths, batch_size=4, epochs=5, lr=1e-4)`
+
+Trains the model using batches of images from folders, where each folder represents a category.
+
+#### Parameters
+- **`model`** (`dict`)  
+  Model configuration returned by `create_model`.
+
+- **`folder_paths`** (`dict[str, str]`)  
+  Mapping of category names to folder paths containing images.
+
+- **`batch_size`** (`int`, optional)  
+  Number of images per batch (default: `4`).
+
+- **`epochs`** (`int`, optional)  
+  Number of training epochs (default: `5`).
+
+- **`lr`** (`float`, optional)  
+  Learning rate (default: `1e-4`).
+
+#### Returns
+- **`dict`**  
+  Updated model configuration after training.
+
+#### Raises
+- `ValueError` if inputs are invalid.
+- `FileNotFoundError` if any folder paths do not exist.
+
+---
+
+### `evaluate_model(model, img_path)`
 
 Evaluates the model on a single image and returns classification probabilities.
 
-**Parameters:**
-- `model_json` (dict): Model configuration.
-- `img_path` (str): Path to the image file.
+#### Parameters
+- **`model`** (`dict`)  
+  Trained model configuration.
 
-**Returns:**
-- dict: Dictionary mapping category names to probabilities.
+- **`img_path`** (`str`)  
+  Path to the image file.
 
-**Raises:**
-- ValueError: If model_json is invalid.
-- FileNotFoundError: If img_path does not exist.
+#### Returns
+- **`dict[str, float]`**  
+  Mapping of category names to probability scores.
+
+#### Raises
+- `ValueError` if the model is invalid.
+- `FileNotFoundError` if `img_path` does not exist.
