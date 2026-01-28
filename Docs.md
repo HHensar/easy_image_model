@@ -107,3 +107,76 @@ Evaluates the model on a single image and returns classification probabilities.
 #### Raises
 - `ValueError` if the model is invalid.
 - `FileNotFoundError` if `img_path` does not exist.
+
+
+## Example Usage
+
+The following example shows how to create a model, train it using folders of labeled images, and evaluate a new image.
+
+### Folder Structure
+
+Each category should have its own folder containing images:
+
+```
+
+dataset/
+├── Eagles/
+│   ├── img1.jpg
+│   └── img2.jpg
+├── Penguins/
+├── Owls/
+└── Others/
+
+````
+
+### Training and Evaluation
+
+```python
+from easy_image_model import (
+    create_model,
+    train_model_batch_folders,
+    evaluate_model
+)
+
+# Define classification categories
+categories = ['Eagles', 'Penguins', 'Owls', 'Others']
+
+# Create a model with three hidden layers
+model = create_model(
+    layers=[512, 256, 128],
+    categories=categories,
+    img_size=224
+)
+
+# Map categories to their image folders
+folder_paths = {
+    'Eagles': 'dataset/Eagles',
+    'Penguins': 'dataset/Penguins',
+    'Owls': 'dataset/Owls',
+    'Others': 'dataset/Others'
+}
+
+# Train the model
+model = train_model_batch_folders(
+    model,
+    folder_paths,
+    batch_size=4,
+    epochs=5
+)
+
+# Evaluate a new image
+result = evaluate_model(model, 'test_images/test1.jpg')
+
+print(result)
+# Example output:
+# {
+#   'Eagles': 0.87,
+#   'Penguins': 0.05,
+#   'Owls': 0.03,
+#   'Others': 0.05
+# }
+````
+
+The returned dictionary maps each category to its predicted probability for the input image.
+
+```
